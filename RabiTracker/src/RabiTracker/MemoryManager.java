@@ -9,6 +9,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import com.sun.jna.Memory;
 import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.Kernel32;
 import com.sun.jna.platform.win32.WinNT;
@@ -47,6 +48,12 @@ public class MemoryManager {
 				}*/
 			}
 		}, 5000, 5000, TimeUnit.MILLISECONDS);
+	}
+	
+	public void update() {
+		if (foundRabiRibi) {
+			System.out.println("Game difficulty: "+readIntFromMemory(MemoryData.GAME_DIFFICULTY));
+		}
 	}
 
 	private void CheckRabiRibiClient() {
@@ -94,5 +101,86 @@ public class MemoryManager {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public int readIntFromMemory(long offset) {
+		Memory mem = new Memory(4);
+		Kernel32.INSTANCE.ReadProcessMemory(rabiribiProcess, new Pointer(rabiRibiMemOffset+offset), mem, 4, null);
+		return mem.getInt(0);
+	}
+	
+	public float readFloatFromMemory(long offset) {
+		Memory mem = new Memory(4);
+		Kernel32.INSTANCE.ReadProcessMemory(rabiribiProcess, new Pointer(rabiRibiMemOffset+offset), mem, 4, null);
+		return mem.getFloat(0);
+	}
+	
+	public float readFloatFromMemoryOffset(MemoryData val, long pointer) {
+		Memory mem = new Memory(4);
+		Kernel32.INSTANCE.ReadProcessMemory(rabiribiProcess, new Pointer(pointer+val.getOffset()), mem, 4, null);
+		return mem.getFloat(0);
+	}
+	
+	public int readIntFromMemoryOffset(MemoryData val, long pointer) {
+		Memory mem = new Memory(4);
+		Kernel32.INSTANCE.ReadProcessMemory(rabiribiProcess, new Pointer(pointer+val.getOffset()), mem, 4, null);
+		return mem.getInt(0);
+	}
+	
+	public float readDirectFloatFromMemoryLocation(long pointer) {
+		Memory mem = new Memory(4);
+		Kernel32.INSTANCE.ReadProcessMemory(rabiribiProcess, new Pointer(pointer), mem, 4, null);
+		return mem.getFloat(0);
+	}
+	
+	public int readDirectIntFromMemoryLocation(long pointer) {
+		Memory mem = new Memory(4);
+		Kernel32.INSTANCE.ReadProcessMemory(rabiribiProcess, new Pointer(pointer), mem, 4, null);
+		return mem.getInt(0);
+	}
+	
+	public int readIntFromPointer(MemoryData val, MemoryData pointer) {
+		Memory mem = new Memory(4);
+		Kernel32.INSTANCE.ReadProcessMemory(rabiribiProcess, new Pointer(readIntFromMemory(pointer.getOffset())+val.getOffset()), mem, 4, null);
+		return mem.getInt(0);
+	}
+	
+	public float readFloatFromPointer(MemoryData val, MemoryData pointer) {
+		Memory mem = new Memory(4);
+		Kernel32.INSTANCE.ReadProcessMemory(rabiribiProcess, new Pointer(readIntFromMemory(pointer.getOffset())+val.getOffset()), mem, 4, null);
+		return mem.getFloat(0);
+	}
+	
+	public int readIntFromMemory(MemoryData val) {
+		return (int)readFromMemory(val,MemoryType.INTEGER);
+	}
+	
+	public float readFloatFromMemory(MemoryData val) {
+		return (float)readFromMemory(val,MemoryType.FLOAT);
+	}
+	
+	Object readFromMemory(MemoryData val, MemoryType type) {
+		Memory mem = new Memory(type.getSize());
+		Kernel32.INSTANCE.ReadProcessMemory(rabiribiProcess, new Pointer(rabiRibiMemOffset+val.getOffset()), mem, type.getSize(), null);
+		switch (type) {
+		case FLOAT:
+			return mem.getFloat(0);
+		case INTEGER:
+			return mem.getInt(0);
+		default:
+			System.out.println("WARNING! Type "+type+" does not have a defined value.");
+			return -1;
+		}
+	}
+	
+	int readItemCountFromMemory(MemoryData start_range,
+			MemoryData end_range) {
+		int count=0;
+		for (long i=start_range.getOffset();i<=end_range.getOffset();i++) {
+			if (readIntFromMemory(i)==1) {
+				count++;
+			}
+		}
+		return count;
 	}
 }

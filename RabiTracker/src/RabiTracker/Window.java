@@ -30,6 +30,8 @@ public class Window extends JFrame{
 	
 	public static int TICK = 0;
 	
+	public static String RABI_RIBI_VERSION = "1.90"; //TODO Make a way to detect the version of the game.
+	
 	JFrame window = new JFrame("Rabi Tracker v1.0");
 	DrawingPanel panel = new DrawingPanel(this); 
 	
@@ -57,11 +59,15 @@ public class Window extends JFrame{
 		
 		window.getContentPane().add(panel);
 		window.setVisible(true);
+		
+		MemoryData.loadMemoryData();
 	}
 	
 	private void runTick() {
 		Window.TICK++;
 		panel.repaint();
+		
+		mem.update();
 	}
 	
 	public void update() {

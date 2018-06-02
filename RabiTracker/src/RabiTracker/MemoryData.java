@@ -1,6 +1,11 @@
 package RabiTracker;
 
-import sig.modules.RabiRibi.OffsetHelper;
+import java.io.File;
+import java.io.FileReader;
+import java.util.HashMap;
+
+import sig.utils.DebugUtils;
+import sig.utils.FileUtils;
 
 public enum MemoryData {
 	MONEY(0xD654CC),
@@ -145,7 +150,75 @@ public enum MemoryData {
 	PAUSED(0),
 	;
 	
-	public MemoryData(long baseAddress) {
+	HashMap<String,Long> memoryMap = new HashMap<String,Long>();
+	
+	MemoryData(long baseAddress) {
+		memoryMap.put("1.75", baseAddress);
+	}
+
+	public static void loadMemoryData() {
+		String[] contents = FileUtils.readFromFile("memoryData");
+		for (int i=0;i<contents.length;i++) {
+			String[] split = contents[i].split(":");
+			HashMap<String,Long> map = MemoryData.valueOf(split[0]).memoryMap;
+			
+			String[] split_data = split[1].split(";");
+			int j=0;
+			while (j<split_data.length) {
+				String key = split_data[j++];
+				boolean relative = Boolean.parseBoolean(split_data[j++]);
+				if (relative) {
+					map.put(key,GetRelativeValue(map,key));
+				} else {
+					Long newoffset = Long.decode(split_data[j++]);
+					map.put(key, newoffset);
+				}
+			}
+			System.out.println(MemoryData.valueOf(split[0])+":");
+			DebugUtils.outputHashmap(map);
+		}
+	}
+	
+	static Long GetRelativeValue(HashMap<String,Long> memoryMap, String key) {
+		switch (key) {
+			case "1.851":{
+				return memoryMap.get("1.75")+OffsetHelper.KEY_ITEM_OFFSET_V175_TO_V1851.getUpgradeAddress();
+			}
+			case "1.881":{
+				return memoryMap.get("1.851")+
+						OffsetHelper.KEY_ITEM_OFFSET_V175_TO_V1881.getUpgradeAddress()-
+						OffsetHelper.KEY_ITEM_OFFSET_V175_TO_V1851.getUpgradeAddress();
+			}
+			case "1.90":{
+				return memoryMap.get("1.881")+
+						OffsetHelper.KEY_ITEM_OFFSET_V175_TO_V190.getUpgradeAddress()-
+						OffsetHelper.KEY_ITEM_OFFSET_V175_TO_V1881.getUpgradeAddress();
+			}
+			default:{
+				System.out.println("WARNING! key value "+key+" does not exist! Returning -1, which is probably not what you want.");
+				DebugUtils.showStackTrace();
+				return -1l;
+			}
+		}
+	}
+	
+	public Long getOffset() {
+		return memoryMap.get(Window.RABI_RIBI_VERSION);
+	}
+	
+	enum OffsetHelper{
+		KEY_ITEM_OFFSET_V175_TO_V1851(0x5744D0),
+		KEY_ITEM_OFFSET_V175_TO_V1881(0x5754D0),
+		KEY_ITEM_OFFSET_V175_TO_V190(0x5994E8);
 		
+		long upgradeAddress;
+		
+		OffsetHelper(long baseAddr) {
+			this.upgradeAddress = baseAddr;
+		}
+		
+		public long getUpgradeAddress() {
+			return upgradeAddress;
+		}
 	}
 }
