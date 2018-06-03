@@ -52,7 +52,14 @@ public class MemoryManager {
 	
 	public void update() {
 		if (foundRabiRibi) {
-			System.out.println("Game difficulty: "+readIntFromMemory(MemoryData.GAME_DIFFICULTY));
+			//System.out.println("Game difficulty: "+readIntFromMemory(MemoryData.GAME_DIFFICULTY));
+			/*for (MemoryData md : MemoryData.values()) {
+				if (md.isItem()) {
+					System.out.println(md+": "+Window.MAIN_WINDOW.mem.readIntFromMemory(md)+",");
+				}
+			}*/
+			//System.out.println("Attack Grow: "+MemoryData.BADGE_ATK_GROW.getOffset());
+			//System.out.print("Attack Grow: "+Window.MAIN_WINDOW.mem.readIntFromMemory(MemoryData.BADGE_DEF_GROW)+",");
 		}
 	}
 
@@ -101,6 +108,10 @@ public class MemoryManager {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public boolean foundRabiRibi() {
+		return foundRabiRibi;
 	}
 	
 	public int readIntFromMemory(long offset) {
@@ -173,7 +184,7 @@ public class MemoryManager {
 		}
 	}
 	
-	int readItemCountFromMemory(MemoryData start_range,
+	public int readItemCountFromMemory(MemoryData start_range,
 			MemoryData end_range) {
 		int count=0;
 		for (long i=start_range.getOffset();i<=end_range.getOffset();i++) {

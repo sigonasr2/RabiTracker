@@ -1,5 +1,6 @@
 package RabiTracker;
 
+import java.awt.Image;
 import java.io.File;
 import java.io.FileReader;
 import java.util.HashMap;
@@ -11,7 +12,7 @@ public enum MemoryData {
 	MONEY(0xD654CC),
 	PLAYTIME(0xD642D8),
 	HEALTHUP_START(0xD6342C),
-	HEALTHUP_END(0xD6342C),
+	HEALTHUP_END(0xD63528),
 	ATTACKUP_START(0xD6352C),
 	ATTACKUP_END(0xD63628),
 	MANAUP_START(0xD6362C),
@@ -47,45 +48,45 @@ public enum MemoryData {
 	GAME_DIFFICULTY(0xD64338),
 	GAME_LOOP(0xD6D05C),
 	
-	HAMMER(0xD632B0),
-	AIR_JUMP(0xD632B4),
-	SLIDING_POWDER(0xD632B8),
-	CARROT_BOMB(0xD632BC),
-	HOURGLASS(0xD632C0),
-	SPEED_BOOST(0xD632C4),
-	AUTO_EARRINGS(0xD632C8),
-	RIBBON(0xD632CC),
-	SOUL_HEART(0xD632D0),
-	RABI_SLIPPERS(0xD632D4),
-	BUNNY_WHIRL(0xD632D8),
-	QUICK_BARETTE(0xD632DC),
-	BOOK_OF_CARROT(0xD632E0),
-	CHAOS_ROD(0xD632E4),
-	HAMMER_WAVE(0xD632E8),
-	HAMMER_ROLL(0xD632EC),
-	LIGHT_ORB(0xD632F0),
-	WATER_ORB(0xD632F4),
-	FIRE_ORB(0xD632F8),
-	NATURE_ORB(0xD632FC),
-	P_HAIRPIN(0xD63300),
-	SUNNY_BEAM(0xD63304),
-	PLUS_NECKLACE(0xD63308),
-	CYBER_FLOWER(0xD6330C),
-	HEALING_STAFF(0xD63310),
-	MAX_BRACELET(0xD63314),
-	EXPLODE_SHOT(0xD63318),
-	AIR_DASH(0xD6331C),
-	BUNNY_STRIKE(0xD63320),
-	STRANGE_BOX(0xD63324),
-	WALL_JUMP(0xD63328),
-	SPIKE_BARRIER(0xD6332C),
-	BUNNY_AMULET(0xD63330),
-	CHARGE_RING(0xD63334),
-	CARROT_SHOOTER(0xD63338),
-	SUPER_CARROT(0xD6333C),
+	HAMMER(0xD632B0,"Hammer","piko_hammer.png",true),
+	AIR_JUMP(0xD632B4,"Air Jump","air_jump.png",true),
+	SLIDING_POWDER(0xD632B8,"Sliding Powder","sliding_powder.png",true),
+	CARROT_BOMB(0xD632BC,"Carrot Bomb","carrot_bomb.png",true),
+	HOURGLASS(0xD632C0,"Hourglass","hourglass.png",true),
+	SPEED_BOOST(0xD632C4,"Speed Boost","speed_boost.png",true),
+	AUTO_EARRINGS(0xD632C8,"Auto Earrings","auto_earrings.png",true),
+	RIBBON(0xD632CC,"Ribbon","ribbon.png",true),
+	SOUL_HEART(0xD632D0,"Soul Heart","soul_heart.png",true),
+	RABI_SLIPPERS(0xD632D4,"Rabi Slippers","rabi_slippers.png",true),
+	BUNNY_WHIRL(0xD632D8,"Bunny Whirl","bunny_whirl.png",true),
+	QUICK_BARETTE(0xD632DC,"Quick Barrette","quick_barrette.png",true),
+	BOOK_OF_CARROT(0xD632E0,"Book of Carrot","book_of_carrot.png",true),
+	CHAOS_ROD(0xD632E4,"Chaos Rod","chaos_rod.png",true),
+	HAMMER_WAVE(0xD632E8,"Hammer Wave","hammer_wave.png",true),
+	HAMMER_ROLL(0xD632EC,"Hammer Roll","hammer_roll.png",true),
+	LIGHT_ORB(0xD632F0,"Light Orb","light_orb.png",true),
+	WATER_ORB(0xD632F4,"Water Orb","water_orb.png",true),
+	FIRE_ORB(0xD632F8,"Fire Orb","fire_orb.png",true),
+	NATURE_ORB(0xD632FC,"Nature Orb","nature_orb.png",true),
+	P_HAIRPIN(0xD63300,"P. Hairpin","p_hairpin.png",true),
+	SUNNY_BEAM(0xD63304,"Sunny Beam","sunny_beam.png",true),
+	PLUS_NECKLACE(0xD63308,"Plus Necklace","plus_necklace.png",true),
+	CYBER_FLOWER(0xD6330C,"Cyber Flower","cyber_flower.png",true),
+	HEALING_STAFF(0xD63310,"Healing Staff","healing_staff.png",true),
+	MAX_BRACELET(0xD63314,"Max Bracelet","max_bracelet.png",true),
+	EXPLODE_SHOT(0xD63318,"Explode Shot","explode_shot.png",true),
+	AIR_DASH(0xD6331C,"Air Dash","air_dash.png",true),
+	BUNNY_STRIKE(0xD63320,"Bunny Strike","bunny_strike.png",true),
+	STRANGE_BOX(0xD63324,"Strange Box","strange_box.png",true),
+	WALL_JUMP(0xD63328,"Wall Jump","wall_jump.png",true),
+	SPIKE_BARRIER(0xD6332C,"Spike Barrier","spike_barrier.png",true),
+	BUNNY_AMULET(0xD63330,"Bunny Amulet","bunny_amulet.png",true),
+	CHARGE_RING(0xD63334,"Charge Ring","charge_ring.png",true),
+	CARROT_SHOOTER(0xD63338,"Carrot Shooter","carrot_shooter.png",true),
+	SUPER_CARROT(0xD6333C,"Super Carrot","super_carrot.png",true),
 	RUMI_DONUT(0xD63340),
 	RUMI_CAKE(0xD63344),
-	GOLD_CARROT(0xD63348),
+	GOLD_CARROT(0xD63348,"Gold Carrot","gold_carrot.png",true),
 	COCOA_BOMB(0xD6334C),
 	UNKNOWN_ITEM1(0xD63350),
 	TROPHY(0xD63354),
@@ -106,43 +107,43 @@ public enum MemoryData {
 	UNKNOWN_ITEM14(0xD63390),
 	/*DLC_ITEM1(0xD63394,0xD63394+OffsetHelper.KEY_ITEM_OFFSET_V175_TO_V1851),
 	DLC_ITEM2(0xD63398,0xD63398+OffsetHelper.KEY_ITEM_OFFSET_V175_TO_V1851),*/
-	BUNNY_CLOVER(0xD6339C),
-	FAIRYS_FLUTE(0),
-	BUNNY_MEMORIES(0),
-	WIND_BLESSING(0),
+	BUNNY_CLOVER(0xD6339C,"Bunny Clover","bunny_clover.png",true),
+	FAIRYS_FLUTE(0xD643A4,"Fairy's Flute","fairy_s_flute.png",true),
+	BUNNY_MEMORIES(0xD623A8,"Bunny Memories","bunny_memories.png",true),
+	WIND_BLESSING(0xD623A0,"Wind Blessing","wind_blessing.png",true),
 	DLC_ITEM4(0xD633A0),
-	BADGE_HEALTH_PLUS(0xD633AC),
-	BADGE_HEALTH_SURGE(0xD633B0),
-	BADGE_MANA_PLUS(0xD633B4),
-	BADGE_MANA_SURGE(0xD633B8),
-	BADGE_CRISIS_BOOST(0xD633BC),
-	BADGE_ATK_GROW(0xD633C0),
-	BADGE_DEF_GROW(0xD633C4),
-	BADGE_ATK_TRADE(0xD633C8),
-	BADGE_DEF_TRADE(0xD633CC),
-	BADGE_ARM_STRENGTH(0xD633D0),
-	BADGE_CARROT_BOOST(0xD633D4),
-	BADGE_WEAKEN(0xD633D8),
-	BADGE_SELF_DEFENSE(0xD633DC),
-	BADGE_ARMORED(0xD633E0),
-	BADGE_LUCKY_SEVEN(0xD633E4),
-	BADGE_HEX_CANCEL(0xD633E8),
-	BADGE_PURE_LOVE(0xD633EC),
-	BADGE_TOXIC_STRIKE(0xD633F0),
-	BADGE_FRAME_CANCEL(0xD633F4),
-	BADGE_HEALTH_WAGER(0xD633F8),
-	BADGE_MANA_WAGER(0xD633FC),
-	BADGE_STAMINA_PLUS(0xD63400),
-	BADGE_BLESSED(0xD63404),
-	BADGE_HITBOX_DOWN(0xD63408),
-	BADGE_CASHBACK(0xD6340C),
-	BADGE_SURVIVAL(0xD63410),
-	BADGE_TOP_FORM(0xD63414),
-	BADGE_TOUGH_SKIN(0xD63418),
-	BADGE_ERINA_BADGE(0xD6341C),
-	BADGE_RIBBON_BADGE(0xD63420),
-	BADGE_AUTO_TRIGGER(0xD63424),
-	BADGE_LILITHS_GIFT(0xD63428),
+	BADGE_HEALTH_PLUS(0xD633AC,"Health Plus","health_plus.png",false),
+	BADGE_HEALTH_SURGE(0xD633B0,"Health Surge","health_surge.png",false),
+	BADGE_MANA_PLUS(0xD633B4,"Mana Plus","mana_plus.png",false),
+	BADGE_MANA_SURGE(0xD633B8,"Mana Surge","mana_surge.png",false),
+	BADGE_CRISIS_BOOST(0xD633BC,"Crisis Boost","crisis_boost.png",false),
+	BADGE_ATK_GROW(0xD633C0,"ATK Grow","atk_grow.png",false),
+	BADGE_DEF_GROW(0xD633C4,"DEF Grow","def_grow.png",false),
+	BADGE_ATK_TRADE(0xD633C8,"ATK Trade","atk_trade.png",false),
+	BADGE_DEF_TRADE(0xD633CC,"DEF Trade","def_trade.png",false),
+	BADGE_ARM_STRENGTH(0xD633D0,"Arm Strength","arm_strength.png",false),
+	BADGE_CARROT_BOOST(0xD633D4,"Carrot Boost","carrot_boost.png",false),
+	BADGE_WEAKEN(0xD633D8,"Weaken","weaken.png",false),
+	BADGE_SELF_DEFENSE(0xD633DC,"Self Defense","self_defense.png",false),
+	BADGE_ARMORED(0xD633E0,"Armored","armored.png",false),
+	BADGE_LUCKY_SEVEN(0xD633E4,"Lucky Seven","lucky_seven.png",false),
+	BADGE_HEX_CANCEL(0xD633E8,"Hex Cancel","hex_cancel.png",false),
+	BADGE_PURE_LOVE(0xD633EC,"Pure Love","pure_love.png",false),
+	BADGE_TOXIC_STRIKE(0xD633F0,"Toxic Strike","toxic_strike.png",false),
+	BADGE_FRAME_CANCEL(0xD633F4,"Frame Cancel","frame_cancel.png",false),
+	BADGE_HEALTH_WAGER(0xD633F8,"Health Wager","health_wager.png",false),
+	BADGE_MANA_WAGER(0xD633FC,"Mana Wager","mana_wager.png",false),
+	BADGE_STAMINA_PLUS(0xD63400,"Stamina Plus","stamina_plus.png",false),
+	BADGE_BLESSED(0xD63404,"Blessed","blessed.png",false),
+	BADGE_HITBOX_DOWN(0xD63408,"Hitbox Down","hitbox_down.png",false),
+	BADGE_CASHBACK(0xD6340C,"Cashback","cashback.png",false),
+	BADGE_SURVIVAL(0xD63410,"Survival","survival.png",false),
+	BADGE_TOP_FORM(0xD63414,"Top Form","top_form.png",false),
+	BADGE_TOUGH_SKIN(0xD63418,"Tough Skin","tough_skin.png",false),
+	BADGE_ERINA_BADGE(0xD6341C,"Erina","erina_badge.png",false),
+	BADGE_RIBBON_BADGE(0xD63420,"Ribbon","ribbon_badge.png",false),
+	BADGE_AUTO_TRIGGER(0xD63424,"Auto Trigger","auto_trigger.png",false),
+	BADGE_LILITHS_GIFT(0xD63428,"Lilith's Gift","lilith_s_gift.png",false),
 	//13413E8
 	ITEM_PERCENT(0),
 	MAP_PERCENT(0),
@@ -151,9 +152,21 @@ public enum MemoryData {
 	;
 	
 	HashMap<String,Long> memoryMap = new HashMap<String,Long>();
+	String itemName = "[UNKNOWN]";
+	String imgName = "unknown.png";
+	boolean keyItem = false; //Whether or not item is a key item.
+	boolean isItem = false; //Whether or not this is an item.
 	
 	MemoryData(long baseAddress) {
 		memoryMap.put("1.75", baseAddress);
+	}
+	
+	MemoryData(long baseAddress, String itemName, String imgName, boolean keyItem) {
+		memoryMap.put("1.75", baseAddress);
+		this.itemName = itemName;
+		this.imgName = imgName;
+		this.keyItem = keyItem;
+		isItem = true;
 	}
 
 	public static void loadMemoryData() {
@@ -220,5 +233,17 @@ public enum MemoryData {
 		public long getUpgradeAddress() {
 			return upgradeAddress;
 		}
+	}
+	
+	public boolean isItem() {
+		return isItem;
+	}
+	
+	public boolean isKeyItem() {
+		return keyItem;
+	}
+	
+	public Image getImage() {
+		return Window.MAIN_WINDOW.image_map.get(imgName);
 	}
 }
